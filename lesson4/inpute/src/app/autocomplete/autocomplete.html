@@ -1,0 +1,7 @@
+<div [style.background-color]="backgroundColor">
+    <app-input 
+      [name]="inputName" 
+      (search)="filterItems($event)">
+    </app-input>
+    <app-list [items]="filteredItems"></app-list>
+  </div>

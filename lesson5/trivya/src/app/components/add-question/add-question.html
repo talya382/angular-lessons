@@ -1,0 +1,7 @@
+<div class="add-form">
+    <h2>הוספת שאלה</h2>
+    <input [(ngModel)]="questionText" placeholder="טקסט השאלה" />
+    <input [(ngModel)]="answersText" placeholder="תשובות מופרדות בפסיק" />
+    <input type="number" [(ngModel)]="correctIndex" placeholder="אינדקס תשובה נכונה" />
+    <button (click)="submit()">הוסף</button>
+  </div>

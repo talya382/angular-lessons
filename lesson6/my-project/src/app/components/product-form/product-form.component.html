@@ -1,0 +1,132 @@
+<mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>הוספת מוצר חדש</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+  
+        <!-- שם המוצר -->
+        <mat-form-field appearance="outline">
+          <mat-label>שם המוצר</mat-label>
+          <input
+            matInput
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="product.name"
+            required
+            minlength="4"
+            pattern="^[a-zA-Zא-ת0-9 ]+$"
+          />
+  
+          @if (name.touched && name.errors) {
+            @if (name.errors['required']) {
+              <mat-error>שדה חובה</mat-error>
+            }
+            @if (name.errors['minlength']) {
+              <mat-error>חייב להכיל לפחות 4 תווים</mat-error>
+            }
+            @if (name.errors['pattern']) {
+              <mat-error>אותיות ומספרים בלבד</mat-error>
+            }
+          }
+        </mat-form-field>
+  
+        <!-- מחיר -->
+        <mat-form-field appearance="outline">
+          <mat-label>מחיר</mat-label>
+          <input
+            matInput
+            type="number"
+            name="price"
+            #price="ngModel"
+            [(ngModel)]="product.price"
+            required
+            min="0"
+          />
+  
+          @if (price.touched && price.errors) {
+            @if (price.errors['required']) {
+              <mat-error>שדה חובה</mat-error>
+            }
+            @if (price.errors['min']) {
+              <mat-error>המחיר לא יכול להיות שלילי</mat-error>
+            }
+          }
+        </mat-form-field>
+  
+        <!-- תאריך ייצור -->
+        <mat-form-field appearance="outline">
+          <mat-label>תאריך ייצור</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            name="manufactureDate"
+            [(ngModel)]="product.manufactureDate"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+  
+        <!-- חברה - select -->
+        <mat-form-field appearance="outline">
+          <mat-label>חברה</mat-label>
+          <mat-select name="company" [(ngModel)]="product.company">
+            @for (company of companies; track company) {
+              <mat-option [value]="company">{{ company }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- קטגוריות (אופציונלי) -->
+        <mat-form-field appearance="outline">
+          <mat-label>קטגוריות (מופרדות בפסיק)</mat-label>
+          <input
+            matInput
+            name="categories"
+            [(ngModel)]="categoriesInput"
+            (ngModelChange)="onCategoriesChange($event)"
+            placeholder="למשל: מוצרי חלב, משקאות"
+          />
+        </mat-form-field>
+  
+        <!-- כפתור שליחה -->
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="productForm.invalid"
+          >
+            <mat-icon>add</mat-icon>
+            שלח
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  
+  <!-- תצוגת המוצרים שנשמרו -->
+  @if (products.length > 0) {
+    <mat-card class="list-card">
+      <mat-card-header>
+        <mat-card-title>מוצרים שהוספו ({{ products.length }})</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          @for (item of products; track $index) {
+            <mat-list-item>
+              <mat-icon matListItemIcon>shopping_cart</mat-icon>
+              <div matListItemTitle>{{ item.name }} - {{ item.price }} ₪</div>
+              <div matListItemLine>
+                {{ item.company }} | {{ item.manufactureDate | date: 'dd/MM/yyyy' }}
+                @if (item.categories && item.categories.length) {
+                  | קטגוריות: {{ item.categories.join(', ') }}
+                }
+              </div>
+            </mat-list-item>
+          }
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  }

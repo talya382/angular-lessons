@@ -1,0 +1,11 @@
+<h2>רשימת שאלות</h2>
+
+<button (click)="loadQuestions()">🔄 רענן</button>
+
+<p *ngIf="isLoading">טוען שאלות...</p>
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
+
+<app-question-item
+  *ngFor="let q of questions"
+  [question]="q">
+</app-question-item>

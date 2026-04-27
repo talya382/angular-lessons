@@ -1,0 +1,11 @@
+
+<div class="question-card">
+    <h3>{{ question.question }}</h3>
+    <ul>
+      <li *ngFor="let answer of question.answers; let i = index"
+          [class.correct]="i === question.correctAnswer">
+        {{ i + 1 }}. {{ answer }}
+      </li>
+    </ul>
+    <small>ID: {{ question.id }}</small>
+  </div>

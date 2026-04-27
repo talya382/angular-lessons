@@ -1,0 +1,84 @@
+<div class="todo-container">
+  <h2>רשימת המשימות שלי</h2>
+
+  <div class="add-todo-container" style="margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+    <h3>הוספת משימה חדשה</h3>
+    
+    <div class="form-group">
+      <input type="text" 
+             [(ngModel)]="newTodo.title" 
+             placeholder="מה המשימה הבאה?" 
+             class="form-input">
+      
+      <input type="date" 
+             [(ngModel)]="newTodo.dueDate" 
+             class="form-input">
+  
+      <button (click)="addTodo()" 
+              [disabled]="!newTodo.title || !newTodo.dueDate"
+              class="btn-confirm">
+        אישור ✅
+      </button>
+    </div>
+  </div>
+
+  <div class="todo-grid">
+    @for (todo of todos; track todo.id; let i = $index; let isLast = $last) {
+      <div class="todo-card" 
+           [class.even-item]="i % 2 !== 0"
+           [class.editing]="todo.isEditing"
+           [style.background-color]="isOverdue(todo) ? '#fff1f0' : null">
+        
+        <div class="todo-header">
+          <span class="status-icon">
+            @switch (todo.status) {
+              @case ('Done') { <span style="color: green;">✔</span> }
+              @case ('InProgress') { <span style="color: orange;">⏳</span> }
+              @case ('NotDone') { <span style="color: red;">❌</span> }
+            }
+          </span>
+          
+          @if (todo.isEditing) {
+            <input type="date" [(ngModel)]="todo.dueDate" class="edit-input-date">
+          } @else {
+            <span>תאריך: {{ todo.dueDate | date:'dd/MM/yyyy' }}</span>
+            @if (isOverdue(todo)) {
+              <strong style="color: red; margin-right: 5px;">(עבר הזמן!)</strong>
+            }
+          }
+        </div>
+
+        <div class="todo-content">
+          @if (todo.isEditing) {
+            <input type="text" [(ngModel)]="todo.title" class="edit-input-title">
+          } @else {
+            <h3 class="todo-title">{{ todo.title }}</h3>
+          }
+        </div>
+
+        <div class="button-group">
+          @if (!isOverdue(todo)) {
+            <button (click)="toggleEdit(todo)" class="btn-edit">
+              {{ todo.isEditing ? 'שמור וסגור ✅' : 'ערוך משימה ✏️' }}
+            </button>
+          }
+
+          @if (!todo.isEditing) {
+            <button (click)="updateStatus(todo, 'Done')" [disabled]="todo.status === 'Done'">בוצע</button>
+            <button (click)="updateStatus(todo, 'InProgress')" [disabled]="todo.status === 'InProgress'">בתהליך</button>
+            
+            <button (click)="deleteTask(i)" class="btn-delete" style="background-color: #ff4d4f; color: white;">
+              מחק 🗑️
+            </button>
+          }
+        </div>
+
+        @if (isLast) {
+          <p class="last-task-msg">זוהי המשימה האחרונה שלך...</p>
+        }
+      </div>
+    } @empty {
+      <div class="empty-state">אין משימות להצגה.</div>
+    }
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<p>id!</p>
+<div class="card-containar">
+<p>clculat Age {{calculateAge()}}</p>
+</div>
+
+<div class="identity-card-wrapper" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: fit-content;">
+  
+    <div class="info-row">
+      <strong>תמונה:</strong>
+      <br>
+      <img [src]="imageName" alt="תמונת אזרח" [hidden]="isPhotoHidden" style="width: 100px; height: auto; margin-top: 5px;">
+    </div>
+   <button (click)="togglePhoto()">
+        {{ isPhotoHidden ? 'הצג תמונה' : 'הסתר תמונה' }}
+   </button>
+    <div class="info-row">
+      <strong>שם פרטי:</strong> {{ firstName }}
+    </div>
+  
+    <div class="info-row">
+      <strong>שם משפחה:</strong> {{ lastName }}
+    </div>
+  
+    <div class="info-row">
+      <strong>מספר זהות:</strong> {{ idNumber }}
+    </div>
+  
+    <div class="info-row">
+      <strong>תאריך לידה:</strong> {{ birthDate | date:'dd/MM/yyyy' }}
+    </div>
+  
+    <div class="info-row">
+      <strong>גיל מחושב:</strong> {{ calculateAge() }}
+    </div>
+  
+    <div class="info-row">
+      <strong>מספר ילדים:</strong> {{ numberOfChildren }}
+    </div>
+  
+    <div class="info-row">
+      <strong>אזרח ישראלי:</strong> {{ isIsraeli ? 'כן' : 'לא' }}
+    </div>
+  
+  </div>

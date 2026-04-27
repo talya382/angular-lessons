@@ -1,0 +1,60 @@
+.form-card,
+.list-card {
+  max-width: 600px;
+  margin: 24px auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.categories-section {
+  border: 1px dashed #bdbdbd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px 0 16px;
+}
+
+.categories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.empty-text {
+  color: #757575;
+  font-style: italic;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .category-field {
+    flex: 1;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+mat-icon[matListItemIcon] {
+  color: #1976d2;
+}

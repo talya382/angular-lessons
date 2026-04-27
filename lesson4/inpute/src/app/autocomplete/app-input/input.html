@@ -1,0 +1,8 @@
+<input 
+  type="search"
+  [attr.name]="name"
+  autocomplete="off"
+  [(ngModel)]="searchValue"
+  (ngModelChange)="onInputChange()"
+  [title]="'הקשת ' + searchValue.length + ' תווים'"
+/>
