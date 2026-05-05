@@ -1,0 +1,26 @@
+<div class="app-container">
+  
+  <header>
+    <h1>🛍️ חנות בגדים</h1>
+    
+    <!-- 📋 התפריט הראשי -->
+    <nav class="main-menu">
+      <a routerLink="/list" routerLinkActive="active">
+        📋 רשימת בגדים
+      </a>
+      <a routerLink="/search" routerLinkActive="active">
+        🔍 חיפוש בגד
+      </a>
+      <a routerLink="/login" routerLinkActive="active" class="logout">
+        🔓 התנתקות
+      </a>
+    </nav>
+  </header>
+
+  <hr>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="clothing-list-container">
+  
+  <h2>📋 רשימת בגדים</h2>
+  
+  <div class="layout">
+    
+    <!-- 📋 רשימת השמות בצד אחד -->
+    <div class="names-list">
+      <h3>בחרי בגד להצגת פרטים:</h3>
+      <ul>
+        <li *ngFor="let item of clothes" 
+            (click)="selectClothing(item)"
+            [class.selected]="selectedClothing?.code === item.code">
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- 📄 פרטי הבגד בצד השני -->
+    <div class="details-area">
+      <app-clothing-details 
+        *ngIf="selectedClothing" 
+        [clothing]="selectedClothing">
+      </app-clothing-details>
+
+      <p *ngIf="!selectedClothing" class="placeholder">
+        👈 לחצי על שם בגד מהרשימה כדי לראות את הפרטים
+      </p>
+    </div>
+
+  </div>
+</div>

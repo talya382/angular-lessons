@@ -1,0 +1,23 @@
+<div class="clothing-details" *ngIf="clothing">
+  
+  <h2>📄 פרטי הבגד</h2>
+  
+  <img [src]="clothing.image" [alt]="clothing.name" width="250" />
+  
+  <div class="info">
+    <p><strong>קוד:</strong> {{ clothing.code }}</p>
+    <p><strong>שם:</strong> {{ clothing.name }}</p>
+    <p><strong>תיאור:</strong> {{ clothing.description }}</p>
+    <p><strong>מחיר:</strong> {{ clothing.price | currency:'ILS' }}</p>
+  </div>
+
+  <!-- 🏠 קישור חזרה לדף הבית -->
+  <a routerLink="/" class="back-link">
+    🏠 חזרה לדף הבית
+  </a>
+</div>
+
+<div *ngIf="!clothing" class="not-found">
+  <p>❌ לא נמצא בגד להצגה</p>
+  <a routerLink="/" class="back-link">🏠 חזרה לדף הבית</a>
+</div>

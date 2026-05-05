@@ -1,0 +1,39 @@
+<div class="clothing-search-container">
+  
+  <h2>🔍 חיפוש בגד</h2>
+  
+  <!-- 📝 תיבת חיפוש וכפתור -->
+  <div class="search-box">
+    <input 
+      type="text" 
+      [(ngModel)]="searchText" 
+      placeholder="הזיני שם בגד או חלק ממנו..."
+      (keyup.enter)="search()" />
+    
+    <button (click)="search()">
+      🔍 חיפוש
+    </button>
+  </div>
+
+  <!-- 📋 תוצאות החיפוש -->
+  <div class="results">
+
+    <!-- אם נמצאו תוצאות - הציגי את הרשימה -->
+    <div *ngIf="searchResults.length > 0">
+      <h3>נמצאו {{ searchResults.length }} תוצאות:</h3>
+      <ul>
+        <li *ngFor="let item of searchResults">
+          <a [routerLink]="['/details', item.code]">
+            {{ item.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- אם לחצו חיפוש ולא נמצאו תוצאות -->
+    <p *ngIf="hasSearched && searchResults.length === 0" class="no-results">
+      😕 לא נמצאו בגדים התואמים ל-"{{ searchText }}"
+    </p>
+
+  </div>
+</div>
